@@ -17,7 +17,8 @@
 				"vunguyentuan.vscode-postcss",
 				"esbenp.prettier-vscode",
 				"bradlc.vscode-tailwindcss",
-				"dbaeumer.vscode-eslint"
+				"dbaeumer.vscode-eslint",
+				"redhat.vscode-yaml"
 			]
 		}
 	}
