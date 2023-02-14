@@ -14,13 +14,12 @@ plugins:
   - react
   - "@typescript-eslint"
 rules:
-  # suppress errors for missing 'import React' in files
-  react/react-in-jsx-scope: 0,
-  # allow jsx syntax in js files (for next.js project)
+  # Suppress errors for missing 'import React' in files (Vite imports React globally at build-time) (0 = off)
+  react/react-in-jsx-scope: 0
+
+  # Make sure TSX files register as React.
   react/jsx-filename-extension:
     - 1
     - extensions:
-        - .js
         - .jsx
-        - .ts
         - .tsx
