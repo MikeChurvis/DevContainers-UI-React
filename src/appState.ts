@@ -27,10 +27,8 @@ function appStateReducer(state: AppState, action: Action): AppState {
       return { ...state, usersOnline: action.usersOnline };
     case "set_clicks":
       return { ...state, clicks: action.clicks };
-    default:
-      return state;
   }
 }
 
-export default { appStateReducer };
+export { appStateReducer };
 export type { AppState };
