@@ -29,7 +29,7 @@ function App() {
           />
           <span
             id="click-counter"
-            aria-label="The number of times the logo has been clicked."
+            aria-label="Clicks:"
             className="text-8xl font-bold dark:text-slate-100 text-center absolute top-[50%] translate-y-[-30%] left-0 right-0 m-auto"
           >
             {appState.clicks}
