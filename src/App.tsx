@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { useReducer } from "react";
+import { appStateReducer } from "./appState";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [appState, appStateDispatch] = useReducer(appStateReducer, {
+    clicks: 0,
+    usersOnline: 0,
+  });
 
   function incrementCount() {
-    setCount((oldCount) => oldCount + 1);
+    appStateDispatch({ type: "increment_clicks" });
   }
 
   return (
@@ -15,7 +19,7 @@ function App() {
         <button
           onClick={incrementCount}
           className="relative"
-          aria-label={`The Python Atlanta logo, serving as a button. It has been clicked ${count} times. Click it more!`}
+          aria-label={`The Python Atlanta logo, serving as a button. It has been clicked ${appState.clicks} times. Click it more!`}
         >
           <img
             className="max-h-[70vh] my-7 drop-shadow-[0_0_8px_rgba(255,128,0,0.5)]"
@@ -28,7 +32,7 @@ function App() {
             aria-label="The number of times the logo has been clicked."
             className="text-8xl font-bold dark:text-slate-100 text-center absolute top-[50%] translate-y-[-30%] left-0 right-0 m-auto"
           >
-            {count}
+            {appState.clicks}
           </span>
         </button>
       </section>
