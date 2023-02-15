@@ -1,32 +1,38 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
 
 function App() {
   const [count, setCount] = useState(0);
 
+  function incrementCount() {
+    setCount((oldCount) => oldCount + 1);
+  }
+
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+    <main className="dark:bg-slate-700 flex justify-center items-center min-h-screen">
+      <section className=" flex flex-col gap-2 items-center">
+        <h1 className="text-5xl dark:text-slate-100">Hello, PyATL!</h1>
+        <p className="dark:text-slate-300 text-slate-700">(click the logo!)</p>
+        <button
+          onClick={incrementCount}
+          className="relative"
+          aria-label={`The Python Atlanta logo, serving as a button. It has been clicked ${count} times. Click it more!`}
+        >
+          <img
+            className="max-h-[70vh] my-7 drop-shadow-[0_0_8px_rgba(255,128,0,0.5)]"
+            src="https://pyatl.dev/wp-content/uploads/2021/09/logo-1-232x300.png"
+            role="presentation"
+            alt="The Python Atlanta logo."
+          />
+          <span
+            id="click-counter"
+            aria-label="The number of times the logo has been clicked."
+            className="text-8xl font-bold dark:text-slate-100 text-center absolute top-[50%] translate-y-[-30%] left-0 right-0 m-auto"
+          >
+            {count}
+          </span>
         </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
+      </section>
+    </main>
   );
 }
 
