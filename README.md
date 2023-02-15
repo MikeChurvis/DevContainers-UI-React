@@ -30,4 +30,8 @@ Deployment is performed elsewhere. The `MikeChurvis/Portfolio` repo hosts my por
 
 ## Testing
 
-- Playwright
+Vitest performs unit tests on logical entities. Unit test files are kept adjacent to the entities they cover. For example, tests for the reducer function in `src/appState.ts` are in `src/appState.tests.ts`.
+
+Storybook provides an isolated testbed for visual components and their configurations.
+
+Playwright runs the executable specs for the app as a whole.
