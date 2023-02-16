@@ -21,18 +21,19 @@ function App() {
         <button
           onClick={incrementCount}
           className="relative"
+          tabIndex={0}
           aria-label={`The Python Atlanta logo. It has been clicked ${appState.clicks} times. Click it more!`}
         >
           <img
-            className="max-h-[70vh] my-7 drop-shadow-[0_0_6px_var(--tw-shadow-color)] shadow-red-400"
+            className="max-h-[70vh] my-7 transition-all active:duration-[50ms] hover:drop-shadow-[0_6px_5px_var(--tw-shadow-color)] hover:-translate-y-1 active:translate-y-0 active:drop-shadow-[0_0_6px_var(--tw-shadow-color)] active:shadow-orange-400 drop-shadow-[0_0_4px_var(--tw-shadow-color)] shadow-red-400"
             src="https://pyatl.dev/wp-content/uploads/2021/09/logo-1-232x300.png"
             role="presentation"
             alt="The Python Atlanta logo."
           />
           <span
             id="click-counter"
-            aria-label="Clicks:"
-            className="text-8xl font-bold text-white [text-shadow:_0_0_8px_var(--tw-shadow-color)] shadow-black text-center absolute top-[50%] translate-y-[-30%] left-0 right-0 m-auto"
+            role="presentation"
+            className="text-8xl font-bold pointer-events-none text-white [text-shadow:_0_0_8px_var(--tw-shadow-color)] shadow-black text-center absolute top-[50%] translate-y-[-30%] left-0 right-0 m-auto"
           >
             {appState.clicks}
           </span>
