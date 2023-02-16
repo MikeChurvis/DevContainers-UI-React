@@ -15,11 +15,13 @@ function App() {
     <main className="dark:bg-slate-700 flex justify-center items-center min-h-screen">
       <section className=" flex flex-col gap-2 items-center">
         <h1 className="text-5xl dark:text-slate-100">Hello, PyATL!</h1>
-        <p className="dark:text-slate-300 text-slate-700">(click the logo!)</p>
+        <p className="dark:text-slate-300 text-slate-700">
+          (click the logo, raise the count)
+        </p>
         <button
           onClick={incrementCount}
           className="relative"
-          aria-label={`The Python Atlanta logo, serving as a button. It has been clicked ${appState.clicks} times. Click it more!`}
+          aria-label={`The Python Atlanta logo. It has been clicked ${appState.clicks} times. Click it more!`}
         >
           <img
             className="max-h-[70vh] my-7 drop-shadow-[0_0_8px_rgba(255,128,0,0.5)]"
