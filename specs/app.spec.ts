@@ -70,4 +70,14 @@ test.describe("What the user sees when a another user does things:", () => {
   test("The clickers online counter goes down by 1 when another user, currently using the app, closes the app.", () => {
     test.fail();
   });
+
+  test.describe("What happens when the user clicks the external links:", () => {
+    test("The link to the PyATL April Jam session opens (meetup.com/...) in a new tab.", () => {
+      test.fail();
+    });
+
+    test("The link to my website opens (mikechurvis.com) in a new tab.", () => {
+      test.fail();
+    });
+  });
 });
