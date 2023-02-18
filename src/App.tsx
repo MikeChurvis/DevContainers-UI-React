@@ -12,20 +12,20 @@ function App() {
   }
 
   return (
-    <main className="dark:bg-slate-700 flex justify-center items-center min-h-screen">
-      <section className=" flex flex-col gap-2 items-center">
+    <main className="flex min-h-screen items-center justify-center dark:bg-slate-700">
+      <section className=" flex flex-col items-center gap-2">
         <h1 className="text-5xl dark:text-slate-100">Hello, PyATL!</h1>
-        <p className="dark:text-slate-300 text-slate-700">
+        <p className="text-slate-700 dark:text-slate-300">
           (click the logo, raise the count)
         </p>
         <button
           onClick={incrementCount}
-          className="relative group"
+          className="group relative"
           tabIndex={0}
           aria-label={`The Python Atlanta logo. It has been clicked ${appState.clicks} times. Click it more!`}
         >
           <img
-            className="max-h-[70vh] my-7 transition-all active:duration-[50ms] hover:drop-shadow-[0_6px_5px_var(--tw-shadow-color)] hover:-translate-y-1 active:translate-y-0 active:drop-shadow-[0_0_4px_var(--tw-shadow-color)] active:shadow-orange-400 drop-shadow-[0_0_4px_var(--tw-shadow-color)] shadow-red-400"
+            className="my-7 max-h-[70vh] shadow-red-400 drop-shadow-[0_0_4px_var(--tw-shadow-color)] transition-all hover:-translate-y-1 hover:drop-shadow-[0_6px_5px_var(--tw-shadow-color)] active:translate-y-0 active:shadow-orange-400 active:drop-shadow-[0_0_4px_var(--tw-shadow-color)] active:duration-[50ms]"
             src="https://pyatl.dev/wp-content/uploads/2021/09/logo-1-232x300.png"
             role="presentation"
             alt="The Python Atlanta logo."
@@ -33,7 +33,7 @@ function App() {
           <span
             id="click-counter"
             role="presentation"
-            className="text-8xl font-bold pointer-events-none text-white [text-shadow:_0_0_8px_var(--tw-shadow-color)] shadow-black text-center absolute top-[50%] translate-y-[-30%] left-0 right-0 m-auto"
+            className="pointer-events-none absolute top-[50%] left-0 right-0 m-auto translate-y-[-30%] text-center text-8xl font-bold text-white shadow-black [text-shadow:_0_0_8px_var(--tw-shadow-color)]"
           >
             {appState.clicks}
           </span>
