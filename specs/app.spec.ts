@@ -129,19 +129,43 @@ test.describe("What the user sees when a another user does things:", () => {
   }) => {
     test.skip();
   });
+});
 
-  test.describe("What happens when the user clicks the external links:", () => {
-    test("The link to the PyATL April Jam session opens (meetup.com/...) in a new tab.", async ({
-      page,
-    }) => {
-      test.skip();
-    });
+test.describe("What happens when the user clicks the external links:", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/");
+  });
 
-    test("The link to my website opens (mikechurvis.com) in a new tab.", async ({
-      page,
-    }) => {
-      test.skip();
-    });
+  test("The link to the PyATL April Jam session opens (meetup.com/...) in a new tab.", async ({
+    page,
+  }) => {
+    const newTabPromise = page.waitForEvent("popup");
+
+    await page
+      .locator("footer")
+      .getByText(/jam|workshop|join|sign up/i)
+      .click();
+
+    const newTab = await newTabPromise;
+    await newTab.waitForLoadState();
+
+    await expect(newTab.url()).toMatch("meetup.com");
+  });
+
+  test("The link to my website opens (mikechurvis.com) in a new tab.", async ({
+    page,
+  }) => {
+    const newTabPromise = page.waitForEvent("popup");
+
+    await page
+      .locator("footer")
+      .getByText(/website/i)
+      .click();
+
+    const newTab = await newTabPromise;
+    await newTab.waitForLoadState();
+
+    await expect(newTab.url()).toMatch("mikechurvis.com");
   });
 });
 
