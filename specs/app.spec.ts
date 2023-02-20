@@ -27,13 +27,6 @@ test.describe("What the user sees when they launch the app:", () => {
     await expect(logo).toBeVisible();
   });
 
-  // TODO: decide whether this feature is necessary.
-  // test("A label that says 'click me', pointing at the button.", async ({
-  //   page,
-  // }) => {
-  //   test.skip();
-  // });
-
   test("The number of times the button has been clicked by all users, labeled as such.", async ({
     page,
   }) => {
