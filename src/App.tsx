@@ -27,22 +27,25 @@ function App() {
         >
           <img
             src="https://pyatl.dev/wp-content/uploads/2021/09/logo-1-232x300.png"
-            role="presentation"
+            alt="The PyATL logo"
           />
         </button>
 
-        <span aria-label="Times the button has been clicked:">
-          {appState.clicks}
-        </span>
+        <div data-testid="clicks">
+          <span>Clicks:</span>
+          <span role="status">{appState.clicks}</span>
+        </div>
 
-        <div>
+        <div data-testid="users-online">
           <span>Clickers online:</span>
-          <span>{appState.usersOnline}</span>
+          <span role="status">{appState.usersOnline}</span>
         </div>
       </main>
       <footer>
-        <a href="">Dev Containers Workshop</a>
-        <a href="">See My Website</a>
+        <a href="https://www.meetup.com/python-atlanta/events/qvsqxsyfcgbjb">
+          Dev Containers Workshop
+        </a>
+        <a href="https://mikechurvis.com">My Website</a>
       </footer>
     </>
   );
