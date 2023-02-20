@@ -42,10 +42,22 @@ function App() {
         </div>
       </main>
       <footer>
-        <a href="https://www.meetup.com/python-atlanta/events/qvsqxsyfcgbjb">
+        <a
+          href="https://www.meetup.com/python-atlanta/events/qvsqxsyfcgbjb"
+          target="_blank"
+          rel="noreferrer"
+          data-testid="jam-link"
+        >
           Dev Containers Workshop
         </a>
-        <a href="https://mikechurvis.com">My Website</a>
+        <a
+          href="https://mikechurvis.com"
+          target="_blank"
+          rel="noreferrer"
+          data-testid="website-link"
+        >
+          My Website
+        </a>
       </footer>
     </>
   );
