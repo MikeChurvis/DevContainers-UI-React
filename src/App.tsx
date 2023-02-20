@@ -27,7 +27,7 @@ function App() {
         >
           <img
             src="https://pyatl.dev/wp-content/uploads/2021/09/logo-1-232x300.png"
-            alt="The PyATL logo"
+            alt=""
           />
         </button>
 
