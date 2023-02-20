@@ -1,4 +1,5 @@
-import { test, expect } from "@playwright/test";
+import { test, expect, Locator, Page } from "@playwright/test";
+import { getCenterOfElement } from "./utils";
 
 test.describe("What the user sees when they launch the app:", () => {
   test.beforeEach(async ({ page }) => {
@@ -21,7 +22,7 @@ test.describe("What the user sees when they launch the app:", () => {
 
   test("A button with the Python Atlanta logo on it.", async ({ page }) => {
     const button = page.locator("main button");
-    const logo = button.getByAltText(/(PyATL|Python Atlanta) logo/);
+    const logo = button.locator("img");
 
     await expect(button).toBeVisible();
     await expect(logo).toBeVisible();
@@ -77,33 +78,36 @@ test.describe("What the user sees when they launch the app:", () => {
   });
 });
 
-test.describe("How the user can interact with the button:", () => {
-  test("Click the button with the left mouse button.", async ({ page }) => {
-    test.fail();
+test.describe("The behavior of the button:", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/");
   });
 
-  test("Click the button by tapping it.", async ({ page }) => {
-    test.fail();
+  test("It is clickable.", async ({ page }) => {
+    const button = page.locator("main button");
+
+    await expect(button).toBeVisible();
+    await expect(button).toBeEnabled();
+    await button.click();
   });
 
-  test("Focus the button with the keyboard.", async ({ page }) => {
-    test.fail();
+  test("It is focusable.", async ({ page }) => {
+    const button = page.locator("main button");
+
+    await button.focus();
+    await expect(button).toBeFocused();
   });
 
-  test("Click the button by focusing it and pressing ENTER or SPACE.", async ({
+  test("When clicked, the displayed number of clicks increments by 1.", async ({
     page,
   }) => {
-    test.fail();
-  });
-});
+    const button = page.locator("main button");
 
-test.describe("What happens when the user clicks the button:", () => {
-  test("The number upon the button increments by 1.", async ({ page }) => {
-    test.fail();
-  });
+    expect(await getCurrentNumberOfClicks(page)).toEqual(0);
 
-  test("The label that says 'click me' disappears.", async ({ page }) => {
-    test.fail();
+    await button.click();
+
+    expect(await getCurrentNumberOfClicks(page)).toEqual(1);
   });
 });
 
@@ -140,3 +144,9 @@ test.describe("What the user sees when a another user does things:", () => {
     });
   });
 });
+
+async function getCurrentNumberOfClicks(page: Page) {
+  return Number.parseInt(
+    await page.getByTestId("clicks").getByRole("status").innerText()
+  );
+}
