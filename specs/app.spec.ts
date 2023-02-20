@@ -1,5 +1,4 @@
-import { test, expect, Locator, Page } from "@playwright/test";
-import { getCenterOfElement } from "./utils";
+import { test, expect, Page } from "@playwright/test";
 
 test.describe("What the user sees when they launch the app:", () => {
   test.beforeEach(async ({ page }) => {
