@@ -5,11 +5,16 @@ test.describe("What the user sees when they launch the app:", () => {
     await page.goto("/");
   });
 
-  test("A header with instruction subtext.", async ({ page }) => {
-    await page.locator("heading").getByRole("heading");
-    const instructionSubtext = await page.locator("heading");
+  test("A header that welcomes PyATL.", async ({ page }) => {
+    const header = await page.locator("header h1");
+    await expect(header).toBeVisible();
+    await expect(header).toHaveText(/PyATL|Python Atlanta/);
+  });
 
-    expect(instructionSubtext).toHaveText(/click.*button/);
+  test("Instruction subtext beneath the header.", async ({ page }) => {
+    const subtext = await page.locator("header h1+p");
+    await expect(subtext).toBeVisible();
+    await expect(subtext).toHaveText(/click.*(button|logo)/);
   });
 
   test("A button with the Python Atlanta logo on it.", async ({ page }) => {
