@@ -32,7 +32,7 @@ test.describe("What the user sees when they launch the app:", () => {
   // test("A label that says 'click me', pointing at the button.", async ({
   //   page,
   // }) => {
-  //   test.fail();
+  //   test.skip();
   // });
 
   test("The number of times the button has been clicked by all users, labeled as such.", async ({
@@ -115,32 +115,32 @@ test.describe("What the user sees when a another user does things:", () => {
   test("The clicks counter goes up by 1 when a another user clicks the button.", async ({
     page,
   }) => {
-    test.fail();
+    test.skip();
   });
 
   test("The clickers online counter goes up by 1 when another user launches the app.", async ({
     page,
   }) => {
-    test.fail();
+    test.skip();
   });
 
   test("The clickers online counter goes down by 1 when another user, currently using the app, closes the app.", async ({
     page,
   }) => {
-    test.fail();
+    test.skip();
   });
 
   test.describe("What happens when the user clicks the external links:", () => {
     test("The link to the PyATL April Jam session opens (meetup.com/...) in a new tab.", async ({
       page,
     }) => {
-      test.fail();
+      test.skip();
     });
 
     test("The link to my website opens (mikechurvis.com) in a new tab.", async ({
       page,
     }) => {
-      test.fail();
+      test.skip();
     });
   });
 });
