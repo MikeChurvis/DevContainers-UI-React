@@ -35,3 +35,11 @@ Vitest performs unit tests on logical entities. Unit test files are kept adjacen
 Storybook provides an isolated testbed for visual components and their configurations.
 
 Playwright runs the executable specs for the app as a whole.
+
+## Sources
+
+Mock websocket connection:
+https://wanago.io/2022/08/08/javascript-testing-mocking-websockets-mock-socket/
+
+Create a fixture:
+https://playwright.dev/docs/test-fixtures#creating-a-fixture
