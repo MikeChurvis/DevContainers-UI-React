@@ -43,3 +43,6 @@ https://wanago.io/2022/08/08/javascript-testing-mocking-websockets-mock-socket/
 
 Create a fixture:
 https://playwright.dev/docs/test-fixtures#creating-a-fixture
+
+Bug in Node/ESM that forces Playwright to import TS files as JS:
+https://stackoverflow.com/questions/74916601/cannot-find-module-x-imported-from-y-playwright-with-typescript
