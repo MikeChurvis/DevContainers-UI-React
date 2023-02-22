@@ -1,4 +1,5 @@
-import { test, expect, Page } from "@playwright/test";
+import { expect, Page } from "@playwright/test";
+import { test } from "./UseFixtures.js";
 
 test.describe("What the user sees when they launch the app:", () => {
   test.beforeEach(async ({ page }) => {
@@ -103,43 +104,43 @@ test.describe("The behavior of the button:", () => {
   });
 });
 
-// Tests will be skipped until the mock backend API is implemented.
-test.describe.fixme(
-  "What the user sees when a another user does things:",
-  () => {
-    test("The clicks counter goes up by 1 when a another user clicks the button.", async ({
-      page,
-    }) => {
-      expect(await getClicksNumber(page)).toBe(0);
+test.describe("What the user sees when a another user does things:", () => {
+  test("The clicks counter goes up by 1 when a another user clicks the button.", async ({
+    page,
+    mockBackend,
+  }) => {
+    expect(await getClicksNumber(page)).toBe(0);
 
-      // mockBackend.setClicks(0).simulateUserClickButton();
+    const fakeUserId = mockBackend.simulateUserLaunchesApp();
+    mockBackend.simulateUserClicksButton(fakeUserId);
 
-      expect(await getClicksNumber(page)).toBe(1);
-    });
+    expect(await getClicksNumber(page)).toBe(1);
+  });
 
-    test("The clickers online counter goes up by 1 when another user launches the app.", async ({
-      page,
-    }) => {
-      expect(await getUsersOnlineNumber(page)).toBe(1);
+  test("The clickers online counter goes up by 1 when another user launches the app.", async ({
+    page,
+    mockBackend,
+  }) => {
+    expect(await getUsersOnlineNumber(page)).toBe(1);
 
-      // mockBackend.newUserJoins();
+    mockBackend.simulateUserLaunchesApp();
 
-      expect(await getUsersOnlineNumber(page)).toBe(2);
-    });
+    expect(await getUsersOnlineNumber(page)).toBe(2);
+  });
 
-    test("The clickers online counter goes down by 1 when another user, currently using the app, closes the app.", async ({
-      page,
-    }) => {
-      // const userId = mockBackend.newUserJoins();
+  test("The clickers online counter goes down by 1 when another user, currently using the app, closes the app.", async ({
+    page,
+    mockBackend,
+  }) => {
+    const userId = mockBackend.simulateUserLaunchesApp();
 
-      expect(await getUsersOnlineNumber(page)).toBe(2);
+    expect(await getUsersOnlineNumber(page)).toBe(2);
 
-      // mockBackend.userClosesApp(userId);
+    mockBackend.simulateUserClosesApp(userId);
 
-      expect(await getUsersOnlineNumber(page)).toBe(1);
-    });
-  }
-);
+    expect(await getUsersOnlineNumber(page)).toBe(1);
+  });
+});
 
 test.describe("What happens when the user clicks the external links:", () => {
   test.beforeEach(async ({ page }) => {
