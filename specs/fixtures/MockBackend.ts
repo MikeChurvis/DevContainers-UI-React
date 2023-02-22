@@ -18,17 +18,24 @@ interface MockBackendState {
 export class MockBackend {
   webSocketServer: Server;
   state: MockBackendState;
-  port: number;
+  url: string;
 
-  constructor(port = 5000) {
-    this.port = port;
+  /**
+   * Mocks the websocket endpoint that this app will talk to in production.
+   * Exposes methods that simulate the activity of other users.
+   *
+   * Set its URL as an environment variable, e.g. BACKEND_URL="ws://localhost:5000".
+   * */
+  constructor() {
+    this.url = import.meta.env.BACKEND_URL;
+
     this.state = {
       clicks: 0,
       fakeUsersOnline: new Set(),
       nextFakeUserId: 0,
     };
 
-    this.webSocketServer = new Server(`ws://localhost:${port}`);
+    this.webSocketServer = new Server(this.url);
     this.webSocketServer.on("connection", (connectionToClient) => {
       connectionToClient.on("message", (data) => {
         const message = deserializeMessageFromFrontend(data.toString());
