@@ -1,8 +1,8 @@
 import {
   MessageFromFrontend,
   MessageFromBackend,
-  ClickCountChangedMessage,
-  UsersOnlineChangedMessage,
+  isValid_ClickCountChangedMessage,
+  isValid_UsersOnlineChangedMessage,
 } from "../contracts/WebsocketMessageContract";
 
 export function serializeMessageFromFrontend(
@@ -14,17 +14,18 @@ export function serializeMessageFromFrontend(
 export function deserializeMessageFromBackend(
   data: string
 ): MessageFromBackend {
-  const message = JSON.parse(data) as MessageFromBackend;
+  const message = JSON.parse(data);
 
-  // FIXME: This is very lazy type checking. It is NOT sufficient for validation.
-  switch (message.type) {
-    case "click_count_changed":
-      return message as ClickCountChangedMessage;
-    case "users_online_changed":
-      return message as UsersOnlineChangedMessage;
-    default:
-      throw Error(
-        `Deserialization failed. Message must have a valid "type" property as defined in src/contracts/WebsocketMessageContract. Received instead: ${data}`
-      );
+  const backendMessageValidators = [
+    isValid_ClickCountChangedMessage,
+    isValid_UsersOnlineChangedMessage,
+  ];
+
+  for (const isValid of backendMessageValidators) {
+    if (isValid(message)) return message;
   }
+
+  throw Error(
+    "Cannot deserialize message from backend. The given data does not satisfy any known message contract."
+  );
 }
