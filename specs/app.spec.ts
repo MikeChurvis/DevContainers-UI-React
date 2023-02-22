@@ -13,7 +13,7 @@ test.describe("What the user sees when they launch the app:", () => {
   });
 
   test("Instruction subtext beneath the header.", async ({ page }) => {
-    const subtext = page.locator("header h1+p");
+    const subtext = page.locator("header hgroup p");
 
     await expect(subtext).toBeVisible();
     await expect(subtext).toHaveText(/click.*(button|logo)/);
@@ -95,33 +95,51 @@ test.describe("The behavior of the button:", () => {
   }) => {
     const button = page.locator("main button");
 
-    expect(await getCurrentNumberOfClicks(page)).toEqual(0);
+    expect(await getClicksNumber(page)).toBe(0);
 
     await button.click();
 
-    expect(await getCurrentNumberOfClicks(page)).toEqual(1);
+    expect(await getClicksNumber(page)).toBe(1);
   });
 });
 
-test.describe("What the user sees when a another user does things:", () => {
-  test("The clicks counter goes up by 1 when a another user clicks the button.", async ({
-    page,
-  }) => {
-    test.skip();
-  });
+// Tests will be skipped until the mock backend API is implemented.
+test.describe.fixme(
+  "What the user sees when a another user does things:",
+  () => {
+    test("The clicks counter goes up by 1 when a another user clicks the button.", async ({
+      page,
+    }) => {
+      expect(await getClicksNumber(page)).toBe(0);
 
-  test("The clickers online counter goes up by 1 when another user launches the app.", async ({
-    page,
-  }) => {
-    test.skip();
-  });
+      // mockBackend.setClicks(0).simulateUserClickButton();
 
-  test("The clickers online counter goes down by 1 when another user, currently using the app, closes the app.", async ({
-    page,
-  }) => {
-    test.skip();
-  });
-});
+      expect(await getClicksNumber(page)).toBe(1);
+    });
+
+    test("The clickers online counter goes up by 1 when another user launches the app.", async ({
+      page,
+    }) => {
+      expect(await getUsersOnlineNumber(page)).toBe(1);
+
+      // mockBackend.newUserJoins();
+
+      expect(await getUsersOnlineNumber(page)).toBe(2);
+    });
+
+    test("The clickers online counter goes down by 1 when another user, currently using the app, closes the app.", async ({
+      page,
+    }) => {
+      // const userId = mockBackend.newUserJoins();
+
+      expect(await getUsersOnlineNumber(page)).toBe(2);
+
+      // mockBackend.userClosesApp(userId);
+
+      expect(await getUsersOnlineNumber(page)).toBe(1);
+    });
+  }
+);
 
 test.describe("What happens when the user clicks the external links:", () => {
   test.beforeEach(async ({ page }) => {
@@ -161,8 +179,14 @@ test.describe("What happens when the user clicks the external links:", () => {
   });
 });
 
-async function getCurrentNumberOfClicks(page: Page) {
+async function getClicksNumber(page: Page) {
   return Number.parseInt(
     await page.getByTestId("clicks").getByRole("status").innerText()
+  );
+}
+
+async function getUsersOnlineNumber(page: Page) {
+  return Number.parseInt(
+    await page.getByTestId("users-online").getByRole("status").innerText()
   );
 }
