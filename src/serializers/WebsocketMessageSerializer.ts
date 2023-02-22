@@ -16,6 +16,7 @@ export function deserializeMessageFromBackend(
 ): MessageFromBackend {
   const message = JSON.parse(data) as MessageFromBackend;
 
+  // FIXME: This is very lazy type checking. It is NOT sufficient for validation.
   switch (message.type) {
     case "click_count_changed":
       return message as ClickCountChangedMessage;
