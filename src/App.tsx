@@ -1,5 +1,5 @@
 import { useReducer } from "react";
-import { appStateReducer } from "./AppState";
+import { appStateReducer } from "./reducers/AppStateReducer";
 
 function App() {
   const [appState, appStateDispatch] = useReducer(appStateReducer, {
