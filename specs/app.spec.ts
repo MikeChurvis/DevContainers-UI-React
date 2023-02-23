@@ -111,8 +111,8 @@ test.describe("What the user sees when a another user does things:", () => {
   }) => {
     expect(await getClicksNumber(page)).toBe(0);
 
-    const fakeUserId = mockBackend.simulateUserLaunchesApp();
-    mockBackend.simulateUserClicksButton(fakeUserId);
+    const fakeUserId = await mockBackend.simulateUserLaunchesApp();
+    await mockBackend.simulateUserClicksButton(fakeUserId);
 
     expect(await getClicksNumber(page)).toBe(1);
   });
@@ -123,7 +123,7 @@ test.describe("What the user sees when a another user does things:", () => {
   }) => {
     expect(await getUsersOnlineNumber(page)).toBe(1);
 
-    mockBackend.simulateUserLaunchesApp();
+    await mockBackend.simulateUserLaunchesApp();
 
     expect(await getUsersOnlineNumber(page)).toBe(2);
   });
@@ -132,11 +132,11 @@ test.describe("What the user sees when a another user does things:", () => {
     page,
     mockBackend,
   }) => {
-    const userId = mockBackend.simulateUserLaunchesApp();
+    const userId = await mockBackend.simulateUserLaunchesApp();
 
     expect(await getUsersOnlineNumber(page)).toBe(2);
 
-    mockBackend.simulateUserClosesApp(userId);
+    await mockBackend.simulateUserClosesApp(userId);
 
     expect(await getUsersOnlineNumber(page)).toBe(1);
   });

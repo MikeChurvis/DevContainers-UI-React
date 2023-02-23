@@ -46,3 +46,11 @@ https://playwright.dev/docs/test-fixtures#creating-a-fixture
 
 Bug in Node/ESM that forces Playwright to import TS files as JS:
 https://stackoverflow.com/questions/74916601/cannot-find-module-x-imported-from-y-playwright-with-typescript
+
+How to setup Express with TypeScript in Vite:
+https://dev.to/kevinqtogitty/how-to-set-up-an-express-server-with-typescript-and-es6-import-statements-using-vite-9l6
+
+Running two processes concurrently in a Node project:
+https://medium.com/@anwesha_das/a-strongly-typed-create-react-app-with-an-express-api-server-44e2334ccc71#e344
+
+## Musings

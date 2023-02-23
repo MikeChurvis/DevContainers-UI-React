@@ -1,14 +1,21 @@
 import { useReducer } from "react";
 import { appStateReducer } from "./reducers/AppStateReducer";
+import { useBackend } from "./hooks/UseBackend";
 
-function App() {
-  const [appState, appStateDispatch] = useReducer(appStateReducer, {
+export default function App() {
+  const [appState, performAction] = useReducer(appStateReducer, {
     clicks: 0,
     usersOnline: 0,
   });
 
+  const { backend } = useBackend(performAction);
+
   function incrementCount() {
-    appStateDispatch({ type: "increment_clicks" });
+    performAction({ type: "increment_clicks" });
+
+    if (backend.status in ["closed", "connecting"]) return;
+
+    backend.notifyUserClicked();
   }
 
   return (
@@ -62,5 +69,3 @@ function App() {
     </>
   );
 }
-
-export default App;
