@@ -17,16 +17,19 @@ type SetClicksAction = {
   clicks: number;
 };
 
-type Action = IncrementClicksAction | SetUsersOnlineAction | SetClicksAction;
+export type AppStateAction =
+  | IncrementClicksAction
+  | SetUsersOnlineAction
+  | SetClicksAction;
 
-function appStateReducer(state: AppState, action: Action): AppState {
+function appStateReducer(state: AppState, action: AppStateAction): AppState {
   switch (action.type) {
     case "increment_clicks":
       return { ...state, clicks: state.clicks + 1 };
     case "set_users_online":
       return { ...state, usersOnline: action.usersOnline };
     case "set_clicks":
-      return { ...state, clicks: action.clicks };
+      return { ...state, clicks: Math.max(action.clicks, state.clicks) };
   }
 }
 
