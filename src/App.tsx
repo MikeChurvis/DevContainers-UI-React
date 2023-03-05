@@ -1,6 +1,7 @@
 import { useReducer } from "react";
 import { appStateReducer } from "./reducers/AppStateReducer";
 import { useBackend } from "./hooks/UseBackend";
+import PyATLLogo from "./assets/pyatl-logo.png";
 
 export default function App() {
   const [appState, performAction] = useReducer(appStateReducer, {
@@ -32,10 +33,7 @@ export default function App() {
           tabIndex={0}
           aria-label="Click this button to raise the count below."
         >
-          <img
-            src="https://pyatl.dev/wp-content/uploads/2021/09/logo-1-232x300.png"
-            alt=""
-          />
+          <img src={PyATLLogo} alt="" />
         </button>
 
         <div data-testid="clicks">
