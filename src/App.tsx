@@ -1,6 +1,5 @@
 import { useReducer } from "react";
 import { appStateReducer } from "./reducers/AppStateReducer";
-import { useBackend } from "./hooks/UseBackend";
 import PyATLLogo from "./assets/pyatl-logo.png";
 
 export default function App() {
@@ -9,14 +8,8 @@ export default function App() {
     usersOnline: 0,
   });
 
-  const { backend } = useBackend(performAction);
-
   function incrementCount() {
     performAction({ type: "increment_clicks" });
-
-    if (backend.status in ["closed", "connecting"]) return;
-
-    backend.notifyUserClicked();
   }
 
   return (

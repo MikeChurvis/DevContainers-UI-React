@@ -1,5 +1,4 @@
-import { expect, Page } from "@playwright/test";
-import { test } from "./UseFixtures.js";
+import { test, expect, Page } from "@playwright/test";
 
 test.describe("What the user sees when they launch the app:", () => {
   test.beforeEach(async ({ page }) => {
@@ -101,44 +100,6 @@ test.describe("The behavior of the button:", () => {
     await button.click();
 
     expect(await getClicksNumber(page)).toBe(1);
-  });
-});
-
-test.describe("What the user sees when a another user does things:", () => {
-  test("The clicks counter goes up by 1 when a another user clicks the button.", async ({
-    page,
-    mockBackend,
-  }) => {
-    expect(await getClicksNumber(page)).toBe(0);
-
-    const fakeUserId = await mockBackend.simulateUserLaunchesApp();
-    await mockBackend.simulateUserClicksButton(fakeUserId);
-
-    expect(await getClicksNumber(page)).toBe(1);
-  });
-
-  test("The clickers online counter goes up by 1 when another user launches the app.", async ({
-    page,
-    mockBackend,
-  }) => {
-    expect(await getUsersOnlineNumber(page)).toBe(1);
-
-    await mockBackend.simulateUserLaunchesApp();
-
-    expect(await getUsersOnlineNumber(page)).toBe(2);
-  });
-
-  test("The clickers online counter goes down by 1 when another user, currently using the app, closes the app.", async ({
-    page,
-    mockBackend,
-  }) => {
-    const userId = await mockBackend.simulateUserLaunchesApp();
-
-    expect(await getUsersOnlineNumber(page)).toBe(2);
-
-    await mockBackend.simulateUserClosesApp(userId);
-
-    expect(await getUsersOnlineNumber(page)).toBe(1);
   });
 });
 
