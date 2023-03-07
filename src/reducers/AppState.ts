@@ -1,4 +1,4 @@
-type AppState = {
+export type AppState = {
   clicks: number;
   usersOnline: number;
 };
@@ -13,7 +13,7 @@ type UpdateAppStateAction = {
   data: { state: Partial<AppState> };
 };
 
-type AppAction = IncrementClicksAction | UpdateAppStateAction;
+export type AppAction = IncrementClicksAction | UpdateAppStateAction;
 
 export function appStateReducer(state: AppState, action: AppAction): AppState {
   let newState = state;
