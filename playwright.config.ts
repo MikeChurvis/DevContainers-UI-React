@@ -7,6 +7,8 @@ import dotenv from "dotenv";
  */
 dotenv.config();
 
+const localhostPort = 4173;
+
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
@@ -36,7 +38,7 @@ export default defineConfig({
     /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
     actionTimeout: 0,
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: process.env.APP_BASE_URL ?? "http://localhost:5173",
+    baseURL: process.env.APP_BASE_URL ?? `http://localhost:${localhostPort}`,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
@@ -85,7 +87,7 @@ export default defineConfig({
 
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: "yarn dev",
-    port: 5173,
+    command: "yarn build && yarn preview",
+    port: localhostPort,
   },
 });
