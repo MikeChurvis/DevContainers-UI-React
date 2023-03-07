@@ -1,19 +1,4 @@
-export type AppState = {
-  clicks: number;
-  usersOnline: number;
-};
-
-type IncrementClicksAction = {
-  type: "incrementClicks";
-  data?: { byAmount: number };
-};
-
-type UpdateAppStateAction = {
-  type: "updateAppState";
-  data: { state: Partial<AppState> };
-};
-
-export type AppAction = IncrementClicksAction | UpdateAppStateAction;
+import type { AppState, AppAction } from "../types/AppTypes";
 
 export function appStateReducer(state: AppState, action: AppAction): AppState {
   let newState = state;
