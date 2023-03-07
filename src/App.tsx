@@ -8,8 +8,8 @@ export default function App() {
     usersOnline: 0,
   });
 
-  function incrementCount() {
-    performAction({ type: "increment_clicks" });
+  function incrementClicks() {
+    performAction({ type: "incrementClicks" });
   }
 
   return (
@@ -22,7 +22,7 @@ export default function App() {
       </header>
       <main>
         <button
-          onClick={incrementCount}
+          onClick={incrementClicks}
           tabIndex={0}
           aria-label="Click this button to raise the count below."
         >

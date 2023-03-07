@@ -4,43 +4,41 @@ type AppState = {
 };
 
 type IncrementClicksAction = {
-  type: "increment_clicks";
+  type: "incrementClicks";
+  data?: { byAmount: number };
 };
 
-type SetUsersOnlineAction = {
-  type: "set_users_online";
-  usersOnline: number;
+type UpdateAppStateAction = {
+  type: "updateAppState";
+  data: { state: Partial<AppState> };
 };
 
-type SetClicksAction = {
-  type: "set_clicks";
-  clicks: number;
-};
+type AppAction = IncrementClicksAction | UpdateAppStateAction;
 
-type UpdateStateAction = {
-  type: "update_state";
-  data: Partial<AppState>;
-};
+export function appStateReducer(state: AppState, action: AppAction): AppState {
+  let newState = state;
 
-export type AppStateAction =
-  | IncrementClicksAction
-  | SetUsersOnlineAction
-  | SetClicksAction
-  | UpdateStateAction;
-
-function appStateReducer(state: AppState, action: AppStateAction): AppState {
   switch (action.type) {
-    case "increment_clicks":
-      return { ...state, clicks: state.clicks + 1 };
-    case "set_users_online":
-      return { ...state, usersOnline: action.usersOnline };
-    case "set_clicks":
-      return { ...state, clicks: Math.max(action.clicks, state.clicks) };
-    case "update_state":
-      action.data.clicks = Math.max(action.data.clicks || 0, state.clicks);
-      return { ...state, ...action.data };
+    case "incrementClicks":
+      newState = {
+        ...newState,
+        clicks: newState.clicks + (action.data?.byAmount || 1),
+      };
+      break;
+    case "updateAppState":
+      newState = updateAppState(newState, action.data.state);
+      break;
   }
+
+  return newState;
 }
 
-export { appStateReducer };
-export type { AppState };
+function updateAppState(
+  state: AppState,
+  fragment: Partial<AppState>
+): AppState {
+  // Only accept the higher value. The click counter should never go down.
+  fragment.clicks = Math.max(state.clicks, fragment.clicks || 0);
+
+  return { ...state, ...fragment };
+}
