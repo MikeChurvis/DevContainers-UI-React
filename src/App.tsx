@@ -25,7 +25,7 @@ export default function App() {
     const action: AppAction = { type: "incrementClicks" };
 
     performAction(action);
-    backend.notifyOfAction(action);
+    backend.notify("click");
   }
 
   return (
